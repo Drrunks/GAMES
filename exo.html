@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .suggestion{
+        justify-content: center;
+        text-align: center;
+        border: 2px solid black;
+        width: 100%;
+        height: 300px;
+    }
+    .sugg{ 
+        text-align: center;
+        width: 100%;
+        max-width: 300px;
+        margin-left: 35% ;
+    }
+    .envoi{
+        background-color: orange;
+        height: 30px;
+        width:200px;
+    }
+    input{
+        height: 60px;
+        width: 250px;
+    }
+    ::placeholder{
+        text-align: center;
+    }
+    @media(max-width:800px){
+        .sugg{ 
+        margin-left: 80px;
+    }   
+    }
+</style>
+<body>
+    <section class="suggestion">
+    <div class="sugg">
+        <h1>SUGGESTION</h1>
+        N'hésitez pas à nous suggérer des jeux à ajouter 
+        ou des améliorations pour rendre notre site encore meilleur. <br><br>
+        <input class="mes" type="text"  placeholder="Suggestion" required></input><br><br>
+        <button class="envoi" type="submit">Envoyez</button>
+    </div>
+    </section> 
+</body>
+</html>

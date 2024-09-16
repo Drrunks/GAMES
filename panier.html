@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier</title>
+    <link rel="stylesheet" href="css/all.css">
+    <style>
+        body {
+            background-color: #f9f9f9;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .haut {
+            font-weight: bold;
+            font-size: 30px;
+            color: orange;
+            text-decoration: underline;
+        }
+        #icone {
+            color: orange;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        .centre {
+            text-align: center;
+            border: 2px solid rgb(0, 0, 0);  
+            width: 300px;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            min-height: 150px;
+        }
+        #cart-items {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid rgb(0, 0, 0);  
+        }
+        .supp {
+            border-radius: 10px;
+            border: 1px solid rgb(0, 0, 0);  
+            max-width: 250px;
+            height: 30px;
+            background-color: orange;
+        }
+        .val {
+            border-radius: 10px;
+            max-width: 300px;
+            height: 50px;
+            background-color: rgb(75, 155, 75);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        h2 {
+            text-decoration: underline;
+        }
+        .bas {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 10px;
+            width: 300px;
+            height: 50px;
+            background-color: orange;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            line-height: 50px;
+        }
+        .bas:hover {
+            background-color: darkorange;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="centre">
+        <p class="haut">Votre panier</p>
+        <div id="cart-items"></div>
+        <h2>Total: <span id="total">0</span> FCFA</h2>
+        <button class="val" onclick="sendOrder()">Valider la commande via WhatsApp</button><br><br>
+        <a class="bas" href="decouvrir.html">Retourner à la boutique</a>
+    </div>
+</header>
+
+<script>
+    // Fonction pour afficher les produits dans le panier
+    function displayCart() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let cartItemsDiv = document.getElementById('cart-items');
+        let total = 0;
+        
+        cartItemsDiv.innerHTML = '';
+        cart.forEach((item, index) => {
+            total += item.price * item.quantity;
+            cartItemsDiv.innerHTML += `
+                <div class="cart-item">
+                    <h2>${item.name}</h2>
+                    <p>Prix unitaire: ${item.price} FCFA</p>
+                    <p>Quantité: ${item.quantity}</p>
+                    <button class="supp" onclick="removeFromCart(${index})">Supprimer</button>
+                </div>
+            `;
+        });
+        
+        document.getElementById('total').textContent = total.toFixed(2);
+    }
+    
+    // Fonction pour supprimer un produit du panier
+    function removeFromCart(index) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        displayCart();
+    }
+    
+    // Fonction pour générer le lien WhatsApp avec les détails de la commande
+    function sendOrder() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let phoneNumber = '22991263768'; // Remplace par ton numéro de téléphone sans le '+'
+        let message = 'Commande%20:%0A';
+        
+        cart.forEach(item => {
+            message += `- ${item.name}%20x${item.quantity}%0A`;
+        });
+        
+        let total = document.getElementById('total').textContent;
+        message += `%0ATotal%20: ${total} FCFA`;
+
+        let url = `https://wa.me/${phoneNumber}?text=${message}`;
+        window.open(url, '_blank');
+    }
+
+    // Affiche les produits au chargement de la page
+    window.onload = displayCart;
+</script>
+</body>
+</html>
