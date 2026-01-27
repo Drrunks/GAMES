@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory — Collection GAMES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="memory.css">
+</head>
+<body>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="../../index.html" class="back-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                RETOUR
+            </a>
+            <h1 class="logo-text"><span>M</span><span>E</span><span>M</span><span>O</span><span>R</span><span>Y</span></h1>
+            <div style="width: 80px;"></div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main>
+        
+        <!-- Start Screen -->
+        <div id="startScreen" class="screen">
+            <div class="start-content">
+                <div class="game-title">
+                    <div class="icon-hero">
+                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <h2>MEMORY GAME</h2>
+                    <p>Trouvez toutes les paires de cartes identiques</p>
+                </div>
+
+                <div class="level-selector">
+                    <button data-level="easy" class="level-btn level-easy">
+                        <div class="level-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>
+                            </svg>
+                        </div>
+                        <div class="level-content">
+                            <span class="level-name">FACILE</span>
+                            <span class="level-desc">Idéal pour débuter</span>
+                        </div>
+                        <span class="level-info">2×2</span>
+                    </button>
+                    
+                    <button data-level="medium" class="level-btn level-medium">
+                        <div class="level-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div class="level-content">
+                            <span class="level-name">MOYEN</span>
+                            <span class="level-desc">Un bon défi</span>
+                        </div>
+                        <span class="level-info">4×4</span>
+                    </button>
+                    
+                    <button data-level="hard" class="level-btn level-hard">
+                        <div class="level-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                            </svg>
+                        </div>
+                        <div class="level-content">
+                            <span class="level-name">DIFFICILE</span>
+                            <span class="level-desc">Pour les experts</span>
+                        </div>
+                        <span class="level-info">6×6</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen hidden">
+            
+            <!-- Game Stats -->
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-icon stat-icon-blue">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">NIVEAU</span>
+                        <span class="stat-value" id="levelDisplay">—</span>
+                    </div>
+                </div>
+                <div class="stat-item stat-highlight">
+                    <div class="stat-icon stat-icon-purple">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">COUPS</span>
+                        <span class="stat-value" id="movesCount">0</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon stat-icon-green">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">PAIRES</span>
+                        <span class="stat-value"><span id="pairsFound">0</span> / <span id="totalPairs">0</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Board -->
+            <div class="game-container">
+                <div id="gameBoard" class="memory-grid"></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="actions">
+                <button id="resetBtn" class="btn btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                        <path d="M21 3v5h-5"/>
+                    </svg>
+                    NOUVELLE PARTIE
+                </button>
+                <button id="backBtn" class="btn btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    CHANGER NIVEAU
+                </button>
+            </div>
+        </div>
+
+        <!-- Win Screen -->
+        <div id="winScreen" class="screen hidden">
+            <div class="win-content">
+                <div class="win-header">
+                    <div class="icon-success">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                            <circle cx="40" cy="40" r="36" fill="#10b981" opacity="0.15"/>
+                            <circle cx="40" cy="40" r="32" fill="#10b981"/>
+                            <path d="M28 40l8 8 16-16" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h2>FÉLICITATIONS !</h2>
+                    <p>Toutes les paires ont été trouvées</p>
+                </div>
+
+                <div class="win-stats">
+                    <div class="win-stat">
+                        <div class="win-stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                            </svg>
+                        </div>
+                        <span class="win-stat-value" id="finalMoves">—</span>
+                        <span class="win-stat-label">COUPS</span>
+                    </div>
+                    <div class="win-stat">
+                        <div class="win-stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                        </div>
+                        <span class="win-stat-value" id="performance">—</span>
+                        <span class="win-stat-label">SCORE</span>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button id="playAgainBtn" class="btn btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                            <path d="M21 3v5h-5"/>
+                        </svg>
+                        REJOUER
+                    </button>
+                    <button id="changeLevelBtn" class="btn btn-secondary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                        CHANGER NIVEAU
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="game.js"></script>
+</body>
+</html>

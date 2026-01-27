@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petit Bac — Collection GAMES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="petit-bac.css">
+</head>
+<body>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="../../index.html" class="back-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                RETOUR
+            </a>
+            <h1 class="logo-text"><span>P</span><span>E</span><span>T</span><span>I</span><span>T</span> <span>B</span><span>A</span><span>C</span></h1>
+            <div style="width: 80px;"></div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main>
+        
+        <!-- Start Screen -->
+        <div id="startScreen" class="screen">
+            <div class="start-content">
+                <div class="game-title">
+                    <div class="icon-hero">
+                        <svg width="50" height="50" viewBox="0 0 80 80" fill="none">
+                            <rect x="20" y="20" width="40" height="40" rx="8" fill="currentColor"/>
+                            <path d="M28 28h24M28 36h24M28 44h16" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h2>PETIT BAC IA</h2>
+                    <p>Testez votre culture générale avec une IA qui vérifie vos réponses</p>
+                </div>
+
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-value">5</span>
+                            <span class="info-label">Manches</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-value">90s</span>
+                            <span class="info-label">Par manche</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-value">8</span>
+                            <span class="info-label">Catégories</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="startBtn" class="btn btn-primary btn-large">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                    COMMENCER LA PARTIE
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen hidden">
+            
+            <!-- Game Info Bar -->
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-icon stat-icon-blue">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">MANCHE</span>
+                        <span class="stat-value">
+                            <span id="currentRound">1</span><span class="stat-value-muted">/5</span>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="stat-item stat-highlight">
+                    <div class="stat-icon stat-icon-purple">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">LETTRE</span>
+                        <span class="stat-value stat-value-letter" id="currentLetter">A</span>
+                    </div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon stat-icon-green">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">TEMPS</span>
+                        <span class="stat-value" id="timer">90</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories Form -->
+            <div class="game-container">
+                <form id="categoriesForm">
+                    <div class="categories-grid">
+                        
+                        <div class="category-group">
+                            <label class="category-label">
+                                <span class="category-icon">👤</span>
+                                <span>Prénom</span>
+                            </label>
+                            <input type="text" name="prenom" class="category-input" placeholder="Entrez un prénom..." data-category="prenom" autocomplete="off">
+                        </div>
+                        
+                        <div class="category-group">
+                            <label class="category-label">
+                                <span class="category-icon">🌍</span>
+                                <span>Pays</span>
+                            </label>
+                            <input type="text" name="pays" class="category-input" placeholder="Entrez un pays..." data-category="pays" autocomplete="off">
+                        </div>
+                        
+                        <div class="category-group">
+                            <label class="category-label">
+                                <span class="category-icon">🏙️</span>
+                                <span>Ville</span>
+                            </label>
+                            <input type="text" name="ville" class="category-input" placeholder="Entrez une ville..." data-category="ville" autocomplete="off">
+                        </div>
+                        
+                        <div class="category-group">
+                            <label class="category-label">
+                                <span class="category-icon">🐾</span>
+                                <span>Animal</span>
+                            </label>
+                            <input type="text" name="animal" class="category-input" placeholder="Entrez un animal..." data-category="animal" autocomplete="off">
+                        </div>
+                        
+                        <div class="category-group">
+                            <label class="category-label">
+                                <span class="category-icon">🍎</span>
+                                <span>Fruit</span>
+                            </label>
+                            <input type="text" name="fruit" class="category-input" placeholder="Entrez un fruit..." data-category="fruit" autocomplete="off">
+                        </div>
+                        
+                        <div class="category-group">
+                            <label class="category-label">
+                                <span class="category-icon">💼</span>
+                                <span>Métier</span>
+                            </label>
+                            <input type="text" name="metier" class="category-input" placeholder="Entrez un métier..." data-category="metier" autocomplete="off">
+                        </div>
+                        
+                        <div class="category-group">
+                            <label class="category-label">
+                                <span class="category-icon">🍕</span>
+                                <span>Nourriture</span>
+                            </label>
+                            <input type="text" name="nourriture" class="category-input" placeholder="Entrez une nourriture..." data-category="nourriture" autocomplete="off">
+                        </div>
+                        
+                        <div class="category-group">
+                            <label class="category-label">
+                                <span class="category-icon">🎬</span>
+                                <span>Film/Série</span>
+                            </label>
+                            <input type="text" name="film" class="category-input" placeholder="Entrez un film/série..." data-category="film" autocomplete="off">
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span id="submitBtnText">VALIDER LA MANCHE</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Validation Screen -->
+        <div id="validationScreen" class="screen hidden">
+            <div class="validation-content">
+                <div class="validation-header">
+                    <div class="icon-loading">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                            <circle cx="40" cy="40" r="36" fill="#8B5CF6" opacity="0.1"/>
+                            <circle cx="40" cy="40" r="32" stroke="#8B5CF6" stroke-width="4" fill="none" stroke-dasharray="50 150" stroke-linecap="round">
+                                <animateTransform
+                                    attributeName="transform"
+                                    type="rotate"
+                                    from="0 40 40"
+                                    to="360 40 40"
+                                    dur="1.5s"
+                                    repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                    </div>
+                    <h2>VALIDATION EN COURS...</h2>
+                    <p>L'IA vérifie vos réponses</p>
+                </div>
+                
+                <div class="validation-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">Vérification : 0/40</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="screen hidden">
+            <div class="win-content">
+                <div class="win-header">
+                    <div class="icon-success">
+                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                            <circle cx="40" cy="40" r="36" fill="#10b981" opacity="0.15"/>
+                            <circle cx="40" cy="40" r="32" fill="#10b981"/>
+                            <path d="M28 40l8 8 16-16" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h2>PARTIE TERMINÉE !</h2>
+                    <p>Voici vos résultats vérifiés par l'IA</p>
+                </div>
+
+                <div class="win-stats">
+                    <div class="win-stat">
+                        <div class="win-stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                            </svg>
+                        </div>
+                        <span class="win-stat-value" id="finalScore">0</span>
+                        <span class="win-stat-label">POINTS</span>
+                    </div>
+                    <div class="win-stat">
+                        <div class="win-stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                        </div>
+                        <span class="win-stat-value"><span id="validAnswers">0</span>/<span id="invalidAnswers">0</span></span>
+                        <span class="win-stat-label">RÉPONSES</span>
+                    </div>
+                </div>
+
+                <div class="rounds-details-container">
+                    <div id="roundsDetails" class="rounds-details"></div>
+                </div>
+
+                <div class="actions">
+                    <button id="restartBtn" class="btn btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                            <path d="M21 3v5h-5"/>
+                        </svg>
+                        REJOUER
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="game.js"></script>
+</body>
+</html>

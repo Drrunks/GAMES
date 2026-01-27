@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morpion — Collection GAMES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="morpion.css">
+</head>
+<body>
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="../../index.html" class="back-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                RETOUR
+            </a>
+            <h1 class="logo-text"><span>M</span><span>O</span><span>R</span><span>P</span><span>I</span><span>O</span><span>N</span></h1>
+            <div style="width: 80px;"></div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main>
+        
+        <!-- Start Screen -->
+        <div id="startScreen" class="screen">
+            <div class="start-content">
+                <div class="game-title">
+                    <div class="icon-hero">
+                        <svg width="50" height="50" viewBox="0 0 80 80" fill="none">
+                            <path d="M28 28L52 52M52 28L28 52" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                            <circle cx="40" cy="40" r="12" stroke="#ec4899" stroke-width="4" fill="none"/>
+                        </svg>
+                    </div>
+                    <h2>MORPION</h2>
+                    <p>Alignez 3 symboles identiques pour gagner</p>
+                </div>
+
+                <div class="mode-selector">
+                    <button id="vsPlayerBtn" class="mode-btn mode-player">
+                        <div class="mode-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="mode-content">
+                            <span class="mode-name">JOUEUR VS JOUEUR</span>
+                            <span class="mode-desc">Affrontez un ami</span>
+                        </div>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                    
+                    <button id="vsAIBtn" class="mode-btn mode-ai">
+                        <div class="mode-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                        <div class="mode-content">
+                            <span class="mode-name">JOUEUR VS IA</span>
+                            <span class="mode-desc">Défiez l'ordinateur</span>
+                        </div>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="gameScreen" class="screen hidden">
+            
+            <!-- Game Stats -->
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-icon stat-icon-purple">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">MODE</span>
+                        <span class="stat-value" id="gameMode">—</span>
+                    </div>
+                </div>
+                <div class="stat-item stat-highlight">
+                    <div class="stat-icon stat-icon-pink">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4M12 8h.01"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">TOUR DE</span>
+                        <span class="stat-value" id="currentPlayer">X</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon stat-icon-blue">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 6L9 17l-5-5"/>
+                        </svg>
+                    </div>
+                    <div class="stat-content">
+                        <span class="stat-label">SCORE</span>
+                        <span class="stat-value"><span id="scoreX">0</span> - <span id="scoreO">0</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Board -->
+            <div class="game-container">
+                <div id="gameBoard" class="morpion-grid">
+                    <div class="cell" data-cell="0"></div>
+                    <div class="cell" data-cell="1"></div>
+                    <div class="cell" data-cell="2"></div>
+                    <div class="cell" data-cell="3"></div>
+                    <div class="cell" data-cell="4"></div>
+                    <div class="cell" data-cell="5"></div>
+                    <div class="cell" data-cell="6"></div>
+                    <div class="cell" data-cell="7"></div>
+                    <div class="cell" data-cell="8"></div>
+                </div>
+
+                <!-- Game Message -->
+                <div id="gameMessage" class="game-message">
+                    <p></p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="actions">
+                <button id="resetBtn" class="btn btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                        <path d="M21 3v5h-5"/>
+                    </svg>
+                    NOUVELLE PARTIE
+                </button>
+                <button id="backBtn" class="btn btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    CHANGER MODE
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="game.js"></script>
+</body>
+</html>
