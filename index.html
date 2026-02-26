@@ -31,7 +31,6 @@
             overflow-x: hidden;
         }
         
-        /* Flous d'arrière-plan */
         .bg-glow {
             position: fixed;
             width: 45vw;
@@ -42,31 +41,32 @@
             opacity: 0.12;
         }
 
-        /* Navigation */
         nav {
             backdrop-filter: blur(15px);
             background: rgba(0, 0, 0, 0.7);
             border-bottom: 1px solid rgba(255, 184, 0, 0.1);
         }
 
-        /* Coloration spécifique du Logo */
         .logo-text {
             letter-spacing: 0.3em;
             font-weight: 700;
         }
-        .logo-text span:nth-child(1) { color: #FFB800; } /* G - Or */
-        .logo-text span:nth-child(2) { color: #FF006E; } /* A - Rose */
-        .logo-text span:nth-child(3) { color: #FF6B35; } /* M - Orange */
-        .logo-text span:nth-child(4) { color: #FFB800; } /* E - Or */
-        .logo-text span:nth-child(5) { color: #3A86FF; } /* S - Bleu */
+        .logo-text span:nth-child(1) { color: #FFB800; }
+        .logo-text span:nth-child(2) { color: #FF006E; }
+        .logo-text span:nth-child(3) { color: #FF6B35; }
+        .logo-text span:nth-child(4) { color: #FFB800; }
+        .logo-text span:nth-child(5) { color: #3A86FF; }
 
         .nav-link {
             color: #ffffff;
             font-weight: 500;
-            padding: 0.6rem 1.5rem;
+            font-size: 0.78rem;
+            padding: 0.5rem 1.1rem;
             border-radius: 99px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            letter-spacing: 0.05em;
+            white-space: nowrap;
         }
 
         .nav-link:hover {
@@ -75,7 +75,6 @@
             transform: scale(1.05);
         }
 
-        /* Hero Design */
         .hero-title {
             font-size: clamp(3rem, 10vw, 5rem);
             font-weight: 700;
@@ -105,6 +104,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s ease;
+            display: inline-block;
         }
 
         .btn-luxury:hover {
@@ -121,6 +121,15 @@
         .reveal { animation: fadeInUp 1s ease forwards; }
         .delay-1 { animation-delay: 0.2s; }
         .delay-2 { animation-delay: 0.4s; }
+
+        /* Mobile nav fix */
+        @media (max-width: 480px) {
+            .nav-link {
+                font-size: 0.72rem;
+                padding: 0.45rem 0.9rem;
+                letter-spacing: 0.03em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -128,16 +137,16 @@
     <div class="bg-glow bottom-[-10%] right-[-10%]" style="background: #3A86FF;"></div>
 
     <nav class="fixed top-0 left-0 right-0 z-50">
-        <div class="container mx-auto px-6 py-5 flex justify-between items-center">
-            <h2 class="logo-text text-2xl">
+        <div class="mx-auto px-4 sm:px-6 py-4 sm:py-5 flex justify-between items-center max-w-7xl">
+            <h2 class="logo-text text-xl sm:text-2xl flex-shrink-0">
                 <span>G</span><span>A</span><span>M</span><span>E</span><span>S</span>
             </h2>
-            <a href="#accueil" class="nav-link">Lancer l'expérience</a>
+            <a href="decouvrir.html" class="nav-link flex-shrink-0">Jouer maintenant</a>
         </div>
     </nav>
 
-    <section class="min-h-screen flex items-center justify-center px-4 text-center">
-        <div class="max-w-4xl">
+    <section class="min-h-screen flex items-center justify-center px-4 sm:px-6 text-center pt-20">
+        <div class="max-w-4xl w-full">
             <p class="text-accent uppercase tracking-[0.5em] mb-6 text-sm reveal">Premium Gaming Studio</p>
             
             <h1 class="hero-title mb-8 reveal delay-1">
