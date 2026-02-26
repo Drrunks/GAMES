@@ -1,12 +1,4 @@
-export const config = {
-    api: {
-        bodyParser: {
-            sizeLimit: '1mb',
-        },
-    },
-};
-
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -22,7 +14,7 @@ export default async function handler(req, res) {
     const { answer, category, letter } = req.body || {};
 
     if (!answer || !category || !letter) {
-        return res.status(400).json({ error: 'Missing fields', received: req.body });
+        return res.status(400).json({ error: 'Missing fields' });
     }
 
     if (!process.env.GEMINI_API_KEY) {
@@ -35,9 +27,7 @@ export default async function handler(req, res) {
 
         const response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 contents: [{
                     parts: [{
@@ -69,4 +59,4 @@ export default async function handler(req, res) {
         console.error('Fetch error:', error.message);
         return res.status(500).json({ error: error.message, isValid: false });
     }
-}
+};
